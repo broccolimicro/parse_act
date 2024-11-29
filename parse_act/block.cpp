@@ -36,15 +36,15 @@ void block::parse(tokenizer &tokens, void *data) {
 	tokens.expect("begin");
 
 	if (tokens.decrement(__FILE__, __LINE__, data)) {
-		type = tokens.next();
-		bool isTable = (type.find("_table") != string::npos);
+		kind = tokens.next();
+		bool isTable = (kind.find("_table") != string::npos);
 
 		name = "";
 		if (tokens.decrement(__FILE__, __LINE__, data)) {
 			name = tokens.next();
 		}
 
-		if (type == "begin") {
+		if (kind == "begin") {
 			tokens.increment(true);
 			tokens.expect<parse::new_line>();
 
@@ -119,9 +119,9 @@ void block::register_syntax(tokenizer &tokens) {
 }
 
 string block::to_string(string tab) const {
-	string result = tab + type + " " + name;
+	string result = tab + kind + " " + name;
 
-	if (type == "begin") {
+	if (kind == "begin") {
 		result += "\n";
 		result += sub.to_string(tab+"\t");
 		result += tab + "end\n";

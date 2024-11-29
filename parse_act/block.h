@@ -13,7 +13,7 @@ struct block : parse::syntax
 	block(tokenizer &tokens, void *data = NULL);
 	~block();
 
-	string type;
+	string kind;
 	string name;
 	vector<string> values;
 	section sub;
